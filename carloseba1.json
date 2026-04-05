@@ -1,0 +1,65 @@
+{
+  "brand": "carloseba1",
+  "name": "Carlos Soto",
+  "handle": "@carloseba1_",
+  "specialty": "Fútbol · Entrenamiento · Rendimiento Deportivo",
+  "location": "Chile",
+  "tagline": "Mi comunidad no solo ve contenido… entrena conmigo, mejora conmigo y confía en lo que recomiendo.",
+  "bio": "Soy creador de contenido enfocado en ayudar a futbolistas amateur y jóvenes a mejorar su rendimiento mediante entrenamientos reales, consejos técnicos y desarrollo mental.",
+  "pillars": [
+    { "icon": "⚡", "label": "Rendimiento futbolístico" },
+    { "icon": "🛡️", "label": "Prevención de lesiones" },
+    { "icon": "💪", "label": "Fuerza y movilidad" },
+    { "icon": "🧠", "label": "Mentalidad deportiva" },
+    { "icon": "🎯", "label": "Entrenamiento aplicable" }
+  ],
+  "kpis": [
+    { "value": 340846, "label": "Visualizaciones", "suffix": "", "prefix": "" },
+    { "value": 230625, "label": "Cuentas alcanzadas", "suffix": "", "prefix": "" },
+    { "value": 22001,  "label": "Seguidores", "suffix": "", "prefix": "" },
+    { "value": 26097,  "label": "Interacciones", "suffix": "", "prefix": "" }
+  ],
+  "rates": [
+    { "value": 89,   "label": "Audiencia no seguidores", "suffix": "%" },
+    { "value": 92.7, "label": "Contenido Reels", "suffix": "%" },
+    { "value": 74.7, "label": "Interacciones no seguidores", "suffix": "%" }
+  ],
+  "audience": {
+    "age": "16 — 35 años",
+    "locations": ["🇨🇱 Chile", "🌎 Latinoamérica"],
+    "segments": ["Futbolistas amateur", "Jugadores jóvenes", "Entrenadores", "Deportistas recreativos", "Mejora de rendimiento"]
+  },
+  "content_types": [
+    "Ejercicios de movilidad futbolística",
+    "Entrenamiento técnico",
+    "Ejercicios de fuerza para fútbol",
+    "Prevención de lesiones",
+    "Mentalidad deportiva"
+  ],
+  "collaborations": [
+    "Reels patrocinados",
+    "Embajador de marca",
+    "Integración de producto",
+    "Historias promocionales",
+    "Sorteos con la comunidad",
+    "Reviews deportivas",
+    "Contenido educativo con producto"
+  ],
+  "target_brands": ["Nike", "Adidas"],
+  "benefits": [
+    "Audiencia deportiva segmentada",
+    "Alto alcance orgánico",
+    "Contenido natural y creíble",
+    "Comunidad activa",
+    "Posicionamiento deportivo"
+  ],
+  "growth": {
+    "labels": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+    "followers": [14000, 15800, 17200, 19100, 21000, 22001],
+    "views": [42000, 68000, 110000, 195000, 280000, 340846]
+  },
+  "contact": {
+    "instagram": "@carloseba1_",
+    "location": "Chile"
+  }
+}

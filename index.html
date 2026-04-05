@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carlos Soto — Media Kit @carloseba1_</title>
+  <meta name="description" content="Media Kit profesional de Carlos Soto, creador de contenido deportivo especializado en fútbol y rendimiento deportivo." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../shared/css/base.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+
+  <style>
+    /* ── Inline layout specifics that live only in this HTML ── */
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      mix-blend-mode: normal;
+      backdrop-filter: blur(0px);
+      transition: backdrop-filter 0.4s, background 0.4s;
+    }
+    .nav.scrolled {
+      backdrop-filter: blur(20px);
+      background: rgba(6,8,8,0.85);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav__logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      letter-spacing: 0.06em;
+    }
+    .nav__links {
+      display: flex; gap: 2rem;
+      list-style: none;
+    }
+    .nav__links a {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      transition: color 0.3s;
+    }
+    .nav__links a:hover { color: var(--color-accent); }
+    @media (max-width: 640px) { .nav__links { display: none; } }
+
+    /* ─── HERO ─── */
+    #hero {
+      padding-top: 7rem;
+      align-items: flex-end;
+      padding-bottom: 6rem;
+    }
+    .hero__inner {
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: flex-end;
+    }
+    .hero__ball {
+      font-size: clamp(8rem, 18vw, 18rem);
+      line-height: 1;
+      filter: drop-shadow(0 0 60px rgba(0,230,118,0.35));
+      user-select: none;
+    }
+    @media (max-width: 768px) {
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__ball  { display: none; }
+    }
+
+    /* ─── ABOUT ─── */
+    #about .section__inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    @media (max-width: 768px) {
+      #about .section__inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    .about__bio {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.8;
+      color: var(--color-muted);
+      font-weight: 300;
+    }
+    .about__bio strong { color: var(--color-text); font-weight: 500; }
+
+    /* Phone stage */
+    .phone-stage {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .phone-label {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-muted);
+    }
+
+    /* ─── NUMBERS (KPI) ─── */
+    #numeros { padding: var(--space-xl) var(--space-md); }
+    #kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 3rem; }
+    @media (max-width: 1024px) { #kpi-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 500px)  { #kpi-grid { grid-template-columns: 1fr; } }
+
+    /* ─── ENGAGEMENT ─── */
+    #engagement .section__inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    @media (max-width: 768px) {
+      #engagement .section__inner { grid-template-columns: 1fr; }
+    }
+    #rates-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+
+    /* ─── AUDIENCIA ─── */
+    #audiencia .section__inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    @media (max-width: 768px) {
+      #audiencia .section__inner { grid-template-columns: 1fr; }
+    }
+    .audience-stat {
+      border-left: 2px solid var(--color-accent);
+      padding-left: 1.2rem;
+      margin: 1rem 0;
+    }
+    .audience-stat__label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); }
+    .audience-stat__value { font-family: var(--font-display); font-size: 2rem; color: var(--color-accent); }
+
+    /* ─── CONTENIDO ─── */
+    #contenido .tabs-wrapper { margin-top: 2rem; }
+
+    /* ─── CRECIMIENTO ─── */
+    #crecimiento .section__inner { max-width: 900px; }
+    .chart-wrap { margin-top: 2.5rem; }
+
+    /* ─── COLABORACIONES ─── */
+    #colaboraciones .colabs-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1rem; margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      #colaboraciones .colabs-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      #colaboraciones .colabs-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── BRANDS TARGET ─── */
+    #marcas .brands-row {
+      display: flex; gap: 4rem; align-items: center; justify-content: center;
+      margin-top: 3rem; flex-wrap: wrap;
+    }
+
+    /* ─── CLOSING ─── */
+    #closing {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+    #closing .section__inner {
+      display: flex; flex-direction: column; align-items: center; gap: 2.5rem;
+    }
+    .closing__ball {
+      font-size: 8rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 40px rgba(0,230,118,0.5));
+    }
+    .closing__contact { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--color-surface);
+      padding: 1.5rem 2.5rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      border-top: 1px solid var(--color-border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Noise overlay -->
+<div class="noise" aria-hidden="true"></div>
+
+<!-- Progress bar -->
+<div id="progress-bar" aria-hidden="true"></div>
+
+<!-- ── NAV ── -->
+<nav class="nav" id="main-nav">
+  <div class="nav__logo">CS<span style="color:var(--color-muted)">⚽</span></div>
+  <ul class="nav__links">
+    <li><a href="#about"          data-scroll>Perfil</a></li>
+    <li><a href="#numeros"        data-scroll>Números</a></li>
+    <li><a href="#audiencia"      data-scroll>Audiencia</a></li>
+    <li><a href="#colaboraciones" data-scroll>Colaboraciones</a></li>
+    <li><a href="#closing"        data-scroll>Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════════════════════════════
+     §1 HERO
+════════════════════════════════════════ -->
+<section class="section section--dark" id="hero">
+  <div class="hero__inner hero__content">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge__dot"></span>
+        Media Kit 2025 · Fútbol &amp; Rendimiento
+      </div>
+      <h1 class="hero__name">CARLOS<br><span>SOTO</span></h1>
+      <p class="hero__handle">@carloseba1_</p>
+      <p class="hero__spec">Fútbol · Entrenamiento · Rendimiento Deportivo · Chile</p>
+      <a href="#numeros" class="hero__cta" data-scroll>Ver estadísticas →</a>
+    </div>
+    <div class="hero__ball" aria-hidden="true">⚽</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §2 PERFIL / ABOUT
+════════════════════════════════════════ -->
+<section class="section section--surface" id="about">
+  <span class="section-stripe" aria-hidden="true">PERFIL PROFESIONAL</span>
+  <div class="section__inner">
+
+    <!-- Texto izquierda -->
+    <div>
+      <p class="label reveal-l gsap-reveal">Sobre mí</p>
+      <div class="divider reveal-l gsap-reveal"></div>
+      <h2 class="display display--md reveal-l gsap-reveal" style="margin:1rem 0;">
+        Creador de contenido<br><span style="color:var(--color-accent)">deportivo</span>
+      </h2>
+      <p class="about__bio reveal-l gsap-reveal">
+        Soy <strong>Carlos Soto</strong>, creador de contenido enfocado en ayudar a futbolistas amateur y jóvenes a mejorar su rendimiento mediante
+        <strong>entrenamientos reales</strong>, consejos técnicos y desarrollo mental.<br><br>
+        Mi contenido está diseñado para ser práctico, aplicable y motivador — no solo para ver, sino para <strong>entrenar de verdad</strong>.
+      </p>
+
+      <!-- Pilares -->
+      <div style="margin-top:2rem; display:grid; grid-template-columns:1fr 1fr; gap:0.4rem;" class="stagger-container reveal-l gsap-reveal">
+        <div class="card pillar-item">
+          <span class="pillar-icon">⚡</span>
+          <span class="body-md">Rendimiento futbolístico</span>
+        </div>
+        <div class="card pillar-item">
+          <span class="pillar-icon">🛡️</span>
+          <span class="body-md">Prevención de lesiones</span>
+        </div>
+        <div class="card pillar-item">
+          <span class="pillar-icon">💪</span>
+          <span class="body-md">Fuerza y movilidad</span>
+        </div>
+        <div class="card pillar-item">
+          <span class="pillar-icon">🧠</span>
+          <span class="body-md">Mentalidad deportiva</span>
+        </div>
+        <div class="card pillar-item" style="grid-column:span 2">
+          <span class="pillar-icon">🎯</span>
+          <span class="body-md">Entrenamiento real aplicable</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone mockup derecha -->
+    <div class="phone-stage reveal-r gsap-reveal">
+      <div class="phone">
+        <div class="phone__screen">
+          <!-- Placeholder Instagram-style screen -->
+          <div style="width:100%;height:100%;background:linear-gradient(160deg,#0a1a0e,#0c2010);display:flex;flex-direction:column;align-items:center;padding:3rem 1rem 1rem;">
+            <div style="width:60px;height:60px;border-radius:50%;border:2px solid var(--color-accent);background:#111;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">⚽</div>
+            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--color-accent);letter-spacing:0.1em;margin-top:0.5rem;">@carloseba1_</p>
+            <p style="font-size:0.55rem;color:var(--color-muted);text-align:center;margin-top:0.3rem;line-height:1.5">Fútbol · Entrenamiento<br>Rendimiento Deportivo</p>
+            <!-- Stats row -->
+            <div style="display:flex;gap:1.5rem;margin-top:1.2rem;border-top:1px solid rgba(0,230,118,0.15);padding-top:1rem;width:100%;justify-content:center;">
+              <div style="text-align:center">
+                <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--color-accent)">22K</div>
+                <div style="font-size:0.45rem;color:var(--color-muted);letter-spacing:0.06em">SEGUIDORES</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--color-accent)">341K</div>
+                <div style="font-size:0.45rem;color:var(--color-muted);letter-spacing:0.06em">VISTAS</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--color-accent)">26K</div>
+                <div style="font-size:0.45rem;color:var(--color-muted);letter-spacing:0.06em">INTERAC.</div>
+              </div>
+            </div>
+            <!-- Mini reels grid -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;width:100%;margin-top:1rem;flex:1;">
+              <div style="background:linear-gradient(135deg,#0d2016,#0a150d);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem">⚽</div>
+              <div style="background:linear-gradient(135deg,#0a150d,#0d2016);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem">💪</div>
+              <div style="background:linear-gradient(135deg,#0d2016,#0a150d);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem">🧠</div>
+              <div style="background:linear-gradient(135deg,#0a150d,#0d2016);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem">🎯</div>
+              <div style="background:linear-gradient(135deg,#0d2016,#0a150d);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem">🛡️</div>
+              <div style="background:linear-gradient(135deg,#0a150d,#0d2016);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:1rem">⚡</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone__glow"></div>
+      </div>
+      <span class="phone-label">Instagram · @carloseba1_</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §3 NÚMEROS / KPIs
+════════════════════════════════════════ -->
+<section class="section section-kpis" id="numeros">
+  <span class="section-stripe" aria-hidden="true">ESTADÍSTICAS PRINCIPALES</span>
+  <div class="section__inner">
+    <p class="label gsap-reveal">Estadísticas · Últimos 90 días</p>
+    <div class="divider gsap-reveal"></div>
+    <h2 class="display display--lg gsap-reveal" style="margin:1rem 0;">
+      Los<br><span style="color:var(--color-accent)">números</span><br>hablan.
+    </h2>
+    <p class="body-lg muted gsap-reveal" style="max-width:520px;margin-bottom:1rem;">
+      Alto alcance orgánico con crecimiento constante — sin compra de seguidores ni bots.
+    </p>
+
+    <!-- KPI grid — populated by JS, with fallback HTML -->
+    <div id="kpi-grid">
+      <div class="card kpi gsap-reveal">
+        <span class="kpi__value" data-target="340846" data-decimals="0">0</span>
+        <span class="kpi__label">Visualizaciones</span>
+      </div>
+      <div class="card kpi gsap-reveal">
+        <span class="kpi__value" data-target="230625" data-decimals="0">0</span>
+        <span class="kpi__label">Cuentas alcanzadas</span>
+      </div>
+      <div class="card kpi gsap-reveal">
+        <span class="kpi__value" data-target="22001" data-decimals="0">0</span>
+        <span class="kpi__label">Seguidores</span>
+      </div>
+      <div class="card kpi gsap-reveal">
+        <span class="kpi__value" data-target="26097" data-decimals="0">0</span>
+        <span class="kpi__label">Interacciones</span>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:2rem;" class="gsap-reveal">
+      <span class="pill">✔ Alto alcance orgánico</span>
+      <span class="pill">✔ Potencial viral</span>
+      <span class="pill">✔ Crecimiento constante</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §4 ENGAGEMENT
+════════════════════════════════════════ -->
+<section class="section section--dark" id="engagement">
+  <span class="section-stripe" aria-hidden="true">ENGAGEMENT</span>
+  <div class="section__inner">
+
+    <div>
+      <p class="label gsap-reveal">Engagement</p>
+      <div class="divider gsap-reveal"></div>
+      <h2 class="display display--md gsap-reveal" style="margin:1rem 0;">
+        Una audiencia<br><span style="color:var(--color-accent)">que actúa.</span>
+      </h2>
+      <p class="body-lg muted gsap-reveal" style="max-width:440px;">
+        Mi audiencia no es pasiva — interactúa, comenta y aplica lo que ve en el campo.
+      </p>
+
+      <!-- Rates - JS populated, fallback HTML -->
+      <div id="rates-grid">
+        <div class="card gsap-reveal">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.8rem;">
+            <span class="body-md" style="font-weight:500">Audiencia no seguidores</span>
+            <span class="kpi__value" style="font-size:2.5rem;" data-target="89" data-decimals="0">89</span>
+          </div>
+          <div class="rate-bar-wrap">
+            <div class="rate-bar"><div class="rate-bar__fill" data-rate="89"></div></div>
+          </div>
+        </div>
+        <div class="card gsap-reveal">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.8rem;">
+            <span class="body-md" style="font-weight:500">Contenido Reels</span>
+            <span class="kpi__value" style="font-size:2.5rem;" data-target="92.7" data-decimals="1">92,7</span>
+          </div>
+          <div class="rate-bar-wrap">
+            <div class="rate-bar"><div class="rate-bar__fill" data-rate="92.7"></div></div>
+          </div>
+        </div>
+        <div class="card gsap-reveal">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.8rem;">
+            <span class="body-md" style="font-weight:500">Interacciones no seguidores</span>
+            <span class="kpi__value" style="font-size:2.5rem;" data-target="74.7" data-decimals="1">74,7</span>
+          </div>
+          <div class="rate-bar-wrap">
+            <div class="rate-bar"><div class="rate-bar__fill" data-rate="74.7"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Derecha: actividad -->
+    <div class="gsap-reveal">
+      <div class="card" style="padding:2rem;margin-bottom:1rem;">
+        <p class="label" style="margin-bottom:1rem;">Actividad del perfil</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div class="kpi">
+            <span class="kpi__value" data-target="2665" data-decimals="0">0</span>
+            <span class="kpi__label">Actividad perfil</span>
+          </div>
+          <div class="kpi">
+            <span class="kpi__value" data-target="2637" data-decimals="0">0</span>
+            <span class="kpi__label">Visitas perfil</span>
+          </div>
+          <div class="kpi" style="grid-column:span 2">
+            <span class="kpi__value" data-target="16205" data-decimals="0">0</span>
+            <span class="kpi__label">Cuentas interactuaron</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:1.5rem;">
+        <p class="label" style="margin-bottom:1rem;">Contenido con mayor rendimiento</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
+          <li class="body-md muted" style="display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--color-accent)">▶</span> Ejercicios de movilidad futbolística</li>
+          <li class="body-md muted" style="display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--color-accent)">▶</span> Entrenamiento técnico</li>
+          <li class="body-md muted" style="display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--color-accent)">▶</span> Ejercicios de fuerza para fútbol</li>
+          <li class="body-md muted" style="display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--color-accent)">▶</span> Prevención de lesiones</li>
+          <li class="body-md muted" style="display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--color-accent)">▶</span> Mentalidad deportiva</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §5 AUDIENCIA
+════════════════════════════════════════ -->
+<section class="section section--surface" id="audiencia">
+  <span class="section-stripe" aria-hidden="true">AUDIENCIA</span>
+  <div class="section__inner">
+
+    <div>
+      <p class="label gsap-reveal">Audiencia objetivo</p>
+      <div class="divider gsap-reveal"></div>
+      <h2 class="display display--md gsap-reveal" style="margin:1rem 0;">
+        La comunidad<br><span style="color:var(--color-accent)">correcta</span>.
+      </h2>
+      <p class="body-lg muted gsap-reveal" style="max-width:440px;">
+        Futbolistas reales que buscan mejorar — no una audiencia casual. Tu marca aparece frente a quien toma decisiones de compra deportiva.
+      </p>
+
+      <div class="audience-stat gsap-reveal">
+        <span class="audience-stat__label">Edad principal</span>
+        <span class="audience-stat__value">16 — 35 años</span>
+      </div>
+
+      <div class="audience-stat gsap-reveal">
+        <span class="audience-stat__label">Ubicación principal</span>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.3rem;">
+          <span class="pill">🇨🇱 Chile</span>
+          <span class="pill">🌎 Latinoamérica</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segmentos -->
+    <div class="gsap-reveal">
+      <p class="label" style="margin-bottom:1.5rem;">Segmentos de audiencia</p>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <div class="card" style="padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;">
+          <span style="font-size:1.5rem">⚽</span>
+          <div>
+            <div style="font-weight:500;">Futbolistas amateur</div>
+            <div class="body-md muted" style="font-size:0.85rem">Juegan en ligas locales, buscan mejorar</div>
+          </div>
+        </div>
+        <div class="card" style="padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;">
+          <span style="font-size:1.5rem">🌱</span>
+          <div>
+            <div style="font-weight:500;">Jugadores jóvenes</div>
+            <div class="body-md muted" style="font-size:0.85rem">Formación y desarrollo deportivo</div>
+          </div>
+        </div>
+        <div class="card" style="padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;">
+          <span style="font-size:1.5rem">📋</span>
+          <div>
+            <div style="font-weight:500;">Entrenadores</div>
+            <div class="body-md muted" style="font-size:0.85rem">Buscan recursos y metodologías</div>
+          </div>
+        </div>
+        <div class="card" style="padding:1rem 1.4rem;display:flex;align-items:center;gap:1rem;">
+          <span style="font-size:1.5rem">🏃</span>
+          <div>
+            <div style="font-weight:500;">Deportistas recreativos</div>
+            <div class="body-md muted" style="font-size:0.85rem">Salud, rendimiento, bienestar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §6 CRECIMIENTO (Chart.js)
+════════════════════════════════════════ -->
+<section class="section section--dark" id="crecimiento">
+  <span class="section-stripe" aria-hidden="true">CRECIMIENTO</span>
+  <div class="section__inner">
+    <p class="label gsap-reveal">Crecimiento · 2025</p>
+    <div class="divider gsap-reveal"></div>
+    <h2 class="display display--md gsap-reveal" style="margin:1rem 0;">
+      Tendencia<br><span style="color:var(--color-accent)">al alza</span>.
+    </h2>
+    <p class="body-lg muted gsap-reveal" style="max-width:520px;margin-bottom:0.5rem;">
+      Crecimiento orgánico sostenido mes a mes — sin picos artificiales.
+    </p>
+    <div class="chart-wrap gsap-reveal">
+      <canvas id="growth-chart" aria-label="Gráfico de crecimiento de seguidores y visualizaciones"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §7 COLABORACIONES
+════════════════════════════════════════ -->
+<section class="section section--surface" id="colaboraciones">
+  <span class="section-stripe" aria-hidden="true">COLABORACIONES</span>
+  <div class="section__inner">
+    <p class="label gsap-reveal">Oportunidades de colaboración</p>
+    <div class="divider gsap-reveal"></div>
+    <h2 class="display display--md gsap-reveal" style="margin:1rem 0;">
+      ¿Cómo<br><span style="color:var(--color-accent)">trabajamos</span>?
+    </h2>
+
+    <div class="colabs-grid">
+      <div class="card">
+        <p style="font-size:2rem;margin-bottom:0.6rem">🎬</p>
+        <p style="font-weight:600;margin-bottom:0.3rem">Reels patrocinados</p>
+        <p class="muted body-md" style="font-size:0.9rem">Contenido nativo con integración natural de la marca en entrenamientos reales.</p>
+      </div>
+      <div class="card">
+        <p style="font-size:2rem;margin-bottom:0.6rem">🏅</p>
+        <p style="font-weight:600;margin-bottom:0.3rem">Embajador de marca</p>
+        <p class="muted body-md" style="font-size:0.9rem">Relación de largo plazo con presencia continua y auténtica.</p>
+      </div>
+      <div class="card">
+        <p style="font-size:2rem;margin-bottom:0.6rem">📦</p>
+        <p style="font-weight:600;margin-bottom:0.3rem">Integración de producto</p>
+        <p class="muted body-md" style="font-size:0.9rem">Uso natural del producto en rutinas de entrenamiento filmadas.</p>
+      </div>
+      <div class="card">
+        <p style="font-size:2rem;margin-bottom:0.6rem">📱</p>
+        <p style="font-weight:600;margin-bottom:0.3rem">Historias promocionales</p>
+        <p class="muted body-md" style="font-size:0.9rem">Contenido efímero de alto impacto para campañas específicas.</p>
+      </div>
+      <div class="card">
+        <p style="font-size:2rem;margin-bottom:0.6rem">🎁</p>
+        <p style="font-weight:600;margin-bottom:0.3rem">Sorteos con la comunidad</p>
+        <p class="muted body-md" style="font-size:0.9rem">Alta participación orgánica y crecimiento conjunto de audiencia.</p>
+      </div>
+      <div class="card">
+        <p style="font-size:2rem;margin-bottom:0.6rem">⭐</p>
+        <p style="font-weight:600;margin-bottom:0.3rem">Reviews deportivas</p>
+        <p class="muted body-md" style="font-size:0.9rem">Evaluaciones honestas de productos con alta credibilidad.</p>
+      </div>
+    </div>
+
+    <!-- Beneficios -->
+    <div style="margin-top:3rem;" class="gsap-reveal">
+      <p class="label" style="margin-bottom:1rem;">Beneficios para tu marca</p>
+      <div style="display:flex;gap:0.7rem;flex-wrap:wrap;">
+        <span class="pill">✔ Audiencia deportiva segmentada</span>
+        <span class="pill">✔ Alto alcance orgánico</span>
+        <span class="pill">✔ Contenido natural y creíble</span>
+        <span class="pill">✔ Comunidad activa</span>
+        <span class="pill">✔ Posicionamiento deportivo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §8 MARCAS OBJETIVO
+════════════════════════════════════════ -->
+<section class="section section--dark" id="marcas">
+  <span class="section-stripe" aria-hidden="true">MARCAS OBJETIVO</span>
+  <div class="section__inner" style="text-align:center;">
+    <p class="label gsap-reveal">Marcas objetivo</p>
+    <div class="divider gsap-reveal" style="margin:0.8rem auto;"></div>
+    <h2 class="display display--md gsap-reveal" style="margin:1rem 0;">
+      Busco marcas que<br><span style="color:var(--color-accent)">compartan valores</span>.
+    </h2>
+    <p class="body-lg muted gsap-reveal" style="max-width:520px;margin:0 auto 1rem;">
+      Rendimiento, autenticidad y desarrollo del futbolista. Estoy interesado en colaborar con líderes de la industria deportiva.
+    </p>
+
+    <div class="brands-row gsap-reveal">
+      <div class="card" style="padding:2rem 3rem;text-align:center;">
+        <p class="brand-logo">NIKE</p>
+        <p class="muted body-md" style="font-size:0.75rem;margin-top:0.5rem;letter-spacing:0.08em">Just Do It</p>
+      </div>
+      <div class="card" style="padding:2rem 3rem;text-align:center;">
+        <p class="brand-logo">ADIDAS</p>
+        <p class="muted body-md" style="font-size:0.75rem;margin-top:0.5rem;letter-spacing:0.08em">Impossible is Nothing</p>
+      </div>
+    </div>
+
+    <p class="body-md muted gsap-reveal" style="max-width:480px;margin:2.5rem auto 0;">
+      También abierto a marcas emergentes del sector deportivo que compartan la visión de conectar con futbolistas reales.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     §9 CLOSING — Pinned
+════════════════════════════════════════ -->
+<section class="section section--dark" id="closing">
+  <div class="section__inner">
+    <span class="closing__ball" aria-hidden="true">⚽</span>
+
+    <div>
+      <p class="label closing__eyebrow">Frase profesional</p>
+      <blockquote class="closing__quote">
+        "Mi comunidad no solo ve contenido…<br>
+        <em>entrena conmigo, mejora conmigo</em><br>
+        y confía en lo que recomiendo."
+      </blockquote>
+    </div>
+
+    <p class="body-lg muted" style="max-width:500px;text-align:center;">
+      Busco colaborar con marcas deportivas que quieran crecer en el mercado chileno y conectar con futbolistas reales. Relaciones a largo plazo que generen valor constante.
+    </p>
+
+    <!-- Contacto -->
+    <div class="closing__contact closing__contact">
+      <a href="https://www.instagram.com/carloseba1_/" target="_blank" rel="noopener" class="contact-chip">
+        <span>📸</span>
+        <span>@carloseba1_</span>
+      </a>
+      <span class="contact-chip">
+        <span>📍</span>
+        <span>Chile</span>
+      </span>
+      <span class="contact-chip">
+        <span>✉️</span>
+        <span>Disponible para colaboraciones</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <p>Carlos Soto · @carloseba1_ · Media Kit 2025 · Chile</p>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+</script>
+
+<!-- Main JS as module -->
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>
